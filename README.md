@@ -15,7 +15,7 @@ gtrimstrings.Excepts = map[string]bool{
 - Untuk penggunaan lainnya silahkan modif sendiri
 
 Go get :
-> go get github.com/ftamhar/gtrimstrings
+> go get github.com/ftamhar/gtrimstrings@v0.0.3
 
 ## Contoh menggunakan postman
 
