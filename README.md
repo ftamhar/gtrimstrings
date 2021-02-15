@@ -1,4 +1,4 @@
-# modif-strings
+# Golang Trim Strings
 ### Middleware ini hanya berfungsi untuk request body = application/json.
 
 ### Middleware ini berjalan di framework gin, namun silahkan dimodif agar bisa berjalan di framework golang lainnya.
