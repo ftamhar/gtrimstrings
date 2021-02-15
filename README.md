@@ -6,13 +6,16 @@ Middleware ini berguna untuk menghapus spasi / tab di awal dan akhir object requ
 
 - Exception default adalah "password", jika ingin merubahnya tambahkan code berikut sebelum middleware dipanggil
 ```go
+router := gin.Default()
+
 gtrimstrings.Excepts = map[string]bool{
     "password" : true,
     "other except" : true,
     ...
 }
+router.POST("/login", gtrimstrings.Transform, loginHandler)
 ```
-- Untuk penggunaan lainnya silahkan modif sendiri
+- Untuk penggunaan di framework lainnya silahkan modif sendiri
 
 Go get :
 > go get github.com/ftamhar/gtrimstrings@v0.0.3
