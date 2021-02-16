@@ -2,7 +2,7 @@
 ### Middleware ini hanya berfungsi untuk request body = application/json.
 
 ### Middleware ini berjalan di framework gin, namun silahkan dimodif agar bisa berjalan di framework golang lainnya.
-Middleware ini berguna untuk menghapus spasi / tab di awal dan akhir object request body
+Middleware ini awalnya berguna untuk menghapus spasi / tab di awal dan akhir object request body, namun proses edit string lainnya bisa ditambah seperti yang contoh di bawah.
 
 - Exception default adalah "password", jika ingin merubahnya tambahkan code berikut sebelum middleware dipanggil
 ```go
@@ -13,12 +13,15 @@ gtrimstrings.Excepts = map[string]bool{
     "other except" : true,
     ...
 }
+
 router.POST("/login", gtrimstrings.Transform, loginHandler)
 ```
-- Untuk penggunaan di framework lainnya silahkan modif sendiri
-
+## Untuk manipulasi strings yang lain silahkan ditambah dengan cara berikut :
+```golang
+gtrimstrings.Process.AppendOperations(strings.ToLower, strings.Title, ...)
+```
 Go get :
-> go get github.com/ftamhar/gtrimstrings@v0.0.3
+> go get github.com/ftamhar/gtrimstrings@v0.0.4
 
 ## Contoh menggunakan postman
 

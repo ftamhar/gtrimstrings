@@ -11,8 +11,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var Excepts = map[string]bool{
-	"password": true,
+var Excepts map[string]bool
+
+type operations []func(s string) string
+
+var Process operations
+
+func (ptr *operations) AppendOperations(listener ...func(s string) string) {
+	*ptr = append(*ptr, listener...)
+}
+
+func init() {
+	Process.AppendOperations(strings.TrimSpace)
+	Excepts = map[string]bool{
+		"password": true,
+	}
 }
 
 func Transform(c *gin.Context) {
@@ -63,8 +76,10 @@ func transform(reflectValue reflect.Value, value interface{}) interface{} {
 	}
 
 	if reflectValue.Kind() == reflect.String {
-		ret := strings.TrimSpace(value.(string))
-		//ret = strings.ToLower(ret)
+		ret := value.(string)
+		for _, p := range Process {
+			ret = p(ret)
+		}
 		return ret
 	}
 	return value
